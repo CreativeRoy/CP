@@ -1,0 +1,62 @@
+#include <iostream>
+#include <unordered_map>
+#include <cstring>
+#include <vector>
+
+using namespace std;
+
+unordered_map<char, int> group;
+unordered_map<char, char> fwd;
+
+int cycle = 0;
+int cnt = 0;
+
+void dfs_number_groups(char node) {
+	group[node] = cnt;
+	char next = fwd[node];
+	if (fwd.count(next) == 1) {
+		if (group.count(next) == 0) {
+			dfs_number_groups(next);			
+		} else if (group[next] == cnt){
+			cycle++;
+		}
+	}
+}
+
+
+int main() {
+	int T;
+	cin >> T;
+	while (T--) {
+		char *st, *ed;
+		cin >> st;
+	   	cin >> ed;
+		group = new unordered_map<char, int>();
+		fwd = new unordered_map<char, char>();
+		for (int i = 0; i < sizeof(st); i++) {
+			if (fwd.count(st[i]) == 1 && 
+				fwd.at(st[i]) != ed[i]) {
+				cout << -1 << endl;	
+				break;
+			}
+			fwd[st[i]] = ed[i];
+		}		
+		cycle = 0;
+		cnt = 0;
+		for (char c : st) {
+			if (group[i] == 0) {
+				cnt++;
+				dfs_number_groups(c);
+			}
+		}			
+		int ans = sizeof(start) + cycle;
+		if (cycle > 0 && sizeof(forward) >= 52) {
+			cout << -1 << endl;
+			break;
+		}
+		cout << ans << endl;
+	}
+	return 0;
+}
+
+

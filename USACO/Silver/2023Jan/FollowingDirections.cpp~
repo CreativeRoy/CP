@@ -1,0 +1,21 @@
+#include <iostream>
+
+using namespace std;
+
+int signs[][];
+int cows[][];
+bool visited[][];
+
+int main() {
+	
+}
+
+void initialize(int x, int y, int carry) {
+	if () {
+		
+	}
+}
+
+void adjust(int x, int y, int add) {
+	
+}

@@ -1,0 +1,71 @@
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class CycleCorrespondence {
+		
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		int K = sc.nextInt();
+		int[] a = new int[K];
+		int[] b = new int[K];
+		int[] rb = new int[K];
+		int[] indA = new int[N+1];
+		int[] indB = new int[N+1];
+		int[] indrB = new int[N+1];
+		for (int i = 1; i <= N; i++) {
+			indA[i] = -1;
+			indB[i] = -1;
+			intrB[i] = -1;
+		}
+		for (int i = 0; i < K; i++) {
+			a[i] = sc.nextInt();
+			indA[a[i]] = i;
+		}
+		for (int i = 0; i < K; i++) {
+			b[i] = sc.nextInt();
+			indB[b[i]] = i;
+			rb[K-i-1] = b[i];
+			indrB[b[i]] = K-i-1;
+		}
+		int[] c1 = new int[K];
+		int[] c2 = new int[K];
+		for (int i = 0; i < K; i++) {
+			int id1 = i;
+			int id2 = indB[a[i]];
+			if (id2 == -1) {
+				continue;
+			}
+			if (id1 <= id2) {
+				c1[id2-id1]++;
+			} else {
+				c1[K-(id1-id2)]++;
+			}
+		}
+		for (int i = 0; i < K; i++) {
+			int id1 = i;
+			int id2 = indrB[a[i]];
+			if (id2 == -1) {
+				continue;
+			}	
+			if (id1 <= id2) {
+				c2[id2-id1]++;
+			} else {
+				c2[K-(id1-id2)]++;
+			}
+		}
+		int max = 0;
+		for (int c : c1) {
+			max = Math.max(c, max);
+		}
+		for (int c : c2) {
+			max = Math.max(c, max);
+		}
+		int sum = 0;
+		for (int i = 1; i <= N; i++) {
+			if (indA[i] == -1 && indB[i] == -1) sum++; 
+		}
+		System.out.println(max+sum);
+	}
+}
